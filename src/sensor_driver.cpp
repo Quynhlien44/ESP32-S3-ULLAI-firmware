@@ -1,10 +1,6 @@
 #include "sensor_driver.h"
 #include <Arduino.h>
 
-#define DHTPIN 4
-#define DHTTYPE DHT22
-#define LDR_PIN 7
-
 // DEFINE variable here for 1 time
 DHT dht(DHTPIN, DHTTYPE);
 Adafruit_SGP30 sgp;
@@ -16,11 +12,11 @@ void sensor_init()
     Serial.println("Init I2C...");
     Wire.begin(I2C_SDA, I2C_SCL);
     // Serial.println("Init SGP30...");
-    // if (!sgp.begin()) {
-    //     Serial.println("SGP30 sensor not found!");
-    //     while (1);
-    // }
-    // sgp.IAQinit();
+    //  if (!sgp.begin()) {
+    //      Serial.println("SGP30 sensor not found!");
+    //      while (1);
+    //  }
+    //  sgp.IAQinit();
     Serial.println("Init done.");
 }
 
@@ -50,6 +46,6 @@ void read_sensors(float &ldr_voltage, float &temperature, float &humidity, float
         tvoc = sgp.TVOC;
         eco2 = sgp.eCO2;
     }*/
-    tvoc = -1;
-    eco2 = -1;
+    tvoc = 60.0;
+    eco2 = 450.0;
 }

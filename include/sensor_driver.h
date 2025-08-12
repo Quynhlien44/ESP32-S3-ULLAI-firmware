@@ -7,6 +7,10 @@
 #include <DHT.h>
 #include <Adafruit_SGP30.h>
 
+#define DHTPIN 4
+#define DHTTYPE DHT22
+#define LDR_PIN 7
+
 extern DHT dht;
 extern Adafruit_SGP30 sgp;
 
