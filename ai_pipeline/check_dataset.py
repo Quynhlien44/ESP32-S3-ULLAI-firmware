@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('dataset_real.csv')
+df = pd.read_csv('data/dataset_real.csv')
 
 print("Unique scenario labels in dataset:")
 print(df['scenario'].unique())

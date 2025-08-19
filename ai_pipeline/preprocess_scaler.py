@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-df = pd.read_csv('dataset_real_clean.csv')
+df = pd.read_csv('data/dataset_real_clean.csv')
 scaler = {
     'ldr_min': float(df['ldr_v'].min()), 'ldr_max': float(df['ldr_v'].max()),
     'tvoc_min': float(df['tvoc_ppb'].min()), 'tvoc_max': float(df['tvoc_ppb'].max()),
