@@ -56,5 +56,5 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-.ai_pipeline/.venv/
-.firmware/.lib/
+ai_pipeline/venv/
+firmware/lib/
