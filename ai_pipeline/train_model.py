@@ -40,7 +40,10 @@ model.fit(x, y, epochs=100, validation_split=0.1)
 
 preds = model.predict(x[:10])
 print("Sample output logits:\n", preds)
-
+print("Max of x:", np.max(x))
+print("Min of x:", np.min(x))
+print("Any NaN in x:", np.any(np.isnan(x)))
+print("Any Inf in x:", np.any(np.isinf(x)))
 
 # (5) Convert/yield quantized TFLite
 converter = tf.lite.TFLiteConverter.from_keras_model(model)

@@ -9,6 +9,11 @@
 #define N_OUTPUTS 3
 #define TENSOR_ARENA_SIZE (16 * 1024)
 
+#define AI_INPUT_SCALE 0.0166197363f
+#define AI_INPUT_ZERO_POINT 52
+#define AI_OUTPUT_SCALE 0.0105614792f
+#define AI_OUTPUT_ZERO_POINT 24
+
 static Eloquent::TinyML::TfLite<N_INPUTS, N_OUTPUTS, TENSOR_ARENA_SIZE> ml;
 
 // Sensor scaler parameters (before quantizing)
