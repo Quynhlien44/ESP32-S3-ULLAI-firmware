@@ -1,11 +1,33 @@
 import serial
-import re
+import csv
 
-ser = serial.Serial('/dev/ttyACM0', baudrate=115200, timeout=1)
-with open('anomaly.csv', 'w') as f:
-    f.write("timestamp,ldr_v,temp_c,hum_pct,tvoc_ppb,eco2_ppm,scenario\n")
-    while True:
-        line = ser.readline().decode("utf-8").strip()
-        if re.match(r'^\d', line):
-            f.write(line + '\n')
-            print(line)
+def main():
+    ser = serial.Serial('/dev/ttyACM0', 115200)  # Adjust port
+    with open('data/ai_log.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['millis', 'ldr_voltage', 'temp', 'hum', 'tvoc', 'eco2',
+                         'prob0', 'prob1', 'prob2', 'AI_latency_us'])
+        try:
+            while True:
+                line = ser.readline().decode(errors='ignore').strip()
+                if line.startswith('Free heap'):
+                    print(line)  # Or log separately
+                    continue
+                if 'AI_latency_us:' in line:
+                    # Parse CSV line
+                    parts = line.split(',')
+                    values = []
+                    for val in parts:
+                        if 'AI_latency_us:' in val:
+                            latency = val.split(':')[1]
+                            values.append(latency)
+                        else:
+                            values.append(val)
+                    if len(values) == 10:
+                        writer.writerow(values)
+                        print("Logged:", values)
+        except KeyboardInterrupt:
+            print("Stopped logging")
+
+if __name__ == '__main__':
+    main()
